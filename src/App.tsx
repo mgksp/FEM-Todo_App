@@ -8,6 +8,10 @@ import bgDesktopDark from "./images/bg-desktop-dark.jpg";
 import iconMoon from "./images/icon-moon.svg";
 import iconSun from "./images/icon-sun.svg";
 
+import iconCross from "./images/icon-cross.svg";
+
+import { todoData } from "./data/todoData";
+
 function App() {
   const [darkTheme, setDarkTheme] = useState<boolean>(false);
 
@@ -44,8 +48,8 @@ function App() {
           />
         </div>
 
-        <main className="w-full max-w-[33.75rem] mx-auto pt-12 px-6">
-          <div className="flex justify-between items-center mb-8">
+        <main className="w-full max-w-[33.75rem] mx-auto pt-10 px-6">
+          <div className="flex justify-between items-center mb-7">
             <h1 className="text-[1.625rem] tracking-[10px] font-bold text-white">
               TODO
             </h1>
@@ -64,13 +68,62 @@ function App() {
             </div>
           </div>
 
-          <div className="rounded flex items-center bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue py-3 px-5">
+          <div className="rounded flex items-center bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue py-4 px-5 mb-4">
+            <input type="checkbox" id="" />
             <input
               className="bg-inherit text-xs -tracking-[0.2px]"
               type="text"
             />
           </div>
+
+          <div className="rounded bg-lt-veryLightGray -tracking-[0.2px] text-xs mb-4">
+            {todoData.map((todo) => (
+              <div className="border-b-[1px] border-gray-400 p-5 flex items-center gap-3">
+                <input type="checkbox" id="" />
+                <div className="w-full">{todo.title}</div>
+                <button className="" aria-label="delete">
+                  <img src={iconCross} alt="" />
+                </button>
+              </div>
+            ))}
+            <div className="flex items-center justify-between p-5">
+              <p>5 items left</p>
+              <button>Clear Completed</button>
+            </div>
+          </div>
+
+          <div className="rounded bg-lt-veryLightGray flex items-center justify-center gap-4 -tracking-[0.2px] text-sm font-bold p-4">
+            <button className="text-brightBlue">All</button>
+            <button className="">Active</button>
+            <button className="">Completed</button>
+          </div>
+
+          <div className="text-sm -tracking-[0.2px] py-10 text-center">
+            Drag and drop to reorder list
+          </div>
         </main>
+
+        <footer className="text-xs text-center py-1">
+          Challenge by&nbsp;
+          <a
+            className="text-sm font-bold"
+            href="https://www.frontendmentor.io?ref=challenge"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Frontend Mentor
+          </a>
+          . Coded by&nbsp;
+          <a
+            className="text-sm font-bold"
+            href="https://www.github.com/mgksp"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Prabu
+          </a>
+          .
+        </footer>
       </div>
     </Fragment>
   );
