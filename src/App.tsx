@@ -53,60 +53,67 @@ function App() {
             <h1 className="text-[1.625rem] tracking-[10px] font-bold text-white">
               TODO
             </h1>
-            <div className="">
-              <button
-                className=""
-                aria-label="switch theme"
-                onClick={() => {
-                  localStorage.setItem("darkMode", `${!darkTheme}`);
-                  setDarkTheme((prev) => !prev);
-                }}
-              >
-                {!darkTheme && <img className="" src={iconMoon} alt="" />}
-                {darkTheme && <img className="" src={iconSun} alt="" />}
-              </button>
-            </div>
+            <button
+              className=""
+              aria-label="switch theme"
+              onClick={() => {
+                localStorage.setItem("darkMode", `${!darkTheme}`);
+                setDarkTheme((prev) => !prev);
+              }}
+            >
+              {!darkTheme && <img className="" src={iconMoon} alt="" />}
+              {darkTheme && <img className="" src={iconSun} alt="" />}
+            </button>
           </div>
 
-          <div className="rounded flex items-center bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue py-4 px-5 mb-4">
+          <div className="rounded flex items-center gap-3 bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue py-4 px-5 mb-4">
             <input type="checkbox" id="" />
             <input
-              className="bg-inherit text-xs -tracking-[0.2px]"
+              className="bg-inherit text-xs -tracking-[0.2px] w-full text-lt-veryDarkGrayishBlue dark:text-dt-lightGrayishBlue"
               type="text"
+              placeholder="Create a new todo..."
             />
           </div>
 
-          <div className="rounded bg-lt-veryLightGray -tracking-[0.2px] text-xs mb-4">
+          <div className="rounded bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue -tracking-[0.2px] text-xs mb-4">
             {todoData.map((todo) => (
-              <div className="border-b-[1px] border-gray-400 p-5 flex items-center gap-3">
+              <div className="border-b-[1px] border-lt-veryLightGrayishBlue dark:border-dt-veryDarkGrayishBlue2 p-5 flex items-center gap-3">
                 <input type="checkbox" id="" />
-                <div className="w-full">{todo.title}</div>
+                <div
+                  className={
+                    todo.completed
+                      ? "w-full text-lt-lightGrayishBlue dark:text-dt-veryDarkGrayishBlue line-through"
+                      : "w-full text-lt-veryDarkGrayishBlue dark:text-dt-lightGrayishBlue"
+                  }
+                >
+                  {todo.title}
+                </div>
                 <button className="" aria-label="delete">
                   <img src={iconCross} alt="" />
                 </button>
               </div>
             ))}
-            <div className="flex items-center justify-between p-5">
+            <div className="flex items-center justify-between p-5 text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue">
               <p>5 items left</p>
               <button>Clear Completed</button>
             </div>
           </div>
 
-          <div className="rounded bg-lt-veryLightGray flex items-center justify-center gap-4 -tracking-[0.2px] text-sm font-bold p-4">
+          <div className="rounded bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue flex items-center justify-center gap-4 -tracking-[0.2px] text-sm font-bold p-4">
             <button className="text-brightBlue">All</button>
             <button className="">Active</button>
             <button className="">Completed</button>
           </div>
 
-          <div className="text-sm -tracking-[0.2px] py-10 text-center">
+          <div className="text-sm -tracking-[0.2px] py-10 text-center text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue">
             Drag and drop to reorder list
           </div>
         </main>
 
-        <footer className="text-xs text-center py-1">
+        <footer className="text-xs text-center py-1 text-lt-veryDarkGrayishBlue dark:text-dt-darkGrayishBlue">
           Challenge by&nbsp;
           <a
-            className="text-sm font-bold"
+            className="text-sm font-bold text-brightBlue"
             href="https://www.frontendmentor.io?ref=challenge"
             rel="noreferrer"
             target="_blank"
@@ -115,7 +122,7 @@ function App() {
           </a>
           . Coded by&nbsp;
           <a
-            className="text-sm font-bold"
+            className="text-sm font-bold text-brightBlue"
             href="https://www.github.com/mgksp"
             rel="noreferrer"
             target="_blank"
