@@ -31,8 +31,8 @@ function App() {
       <div
         className={
           darkTheme
-            ? "relative z-0 min-h-screen dark bg-dt-veryDarkBlue"
-            : "relative z-0 min-h-screen bg-lt-veryLightGrayishBlue"
+            ? "relative z-0 dark bg-dt-veryDarkBlue"
+            : "relative z-0 bg-lt-veryLightGrayishBlue"
         }
       >
         <div className="absolute -z-50 top-0 left-0 right-0 h-[12.5rem] md:h-[18.75rem]">
@@ -48,89 +48,98 @@ function App() {
           />
         </div>
 
-        <main className="w-full max-w-[33.75rem] mx-auto pt-10 px-6">
-          <div className="flex justify-between items-center mb-7">
-            <h1 className="text-[1.625rem] tracking-[10px] font-bold text-white">
-              TODO
-            </h1>
-            <button
-              className=""
-              aria-label="switch theme"
-              onClick={() => {
-                localStorage.setItem("darkMode", `${!darkTheme}`);
-                setDarkTheme((prev) => !prev);
-              }}
-            >
-              {!darkTheme && <img className="" src={iconMoon} alt="" />}
-              {darkTheme && <img className="" src={iconSun} alt="" />}
-            </button>
-          </div>
-
-          <div className="rounded flex items-center gap-3 bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue py-4 px-5 mb-4">
-            <input type="checkbox" id="" />
-            <input
-              className="bg-inherit text-xs -tracking-[0.2px] w-full text-lt-veryDarkGrayishBlue dark:text-dt-lightGrayishBlue"
-              type="text"
-              placeholder="Create a new todo..."
-            />
-          </div>
-
-          <div className="rounded bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue -tracking-[0.2px] text-xs mb-4">
-            {todoData.map((todo) => (
-              <div className="border-b-[1px] border-lt-veryLightGrayishBlue dark:border-dt-veryDarkGrayishBlue2 p-5 flex items-center gap-3">
-                <input type="checkbox" id="" />
-                <div
-                  className={
-                    todo.completed
-                      ? "w-full text-lt-lightGrayishBlue dark:text-dt-veryDarkGrayishBlue line-through"
-                      : "w-full text-lt-veryDarkGrayishBlue dark:text-dt-lightGrayishBlue"
-                  }
-                >
-                  {todo.title}
-                </div>
-                <button className="" aria-label="delete">
-                  <img src={iconCross} alt="" />
-                </button>
-              </div>
-            ))}
-            <div className="flex items-center justify-between p-5 text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue">
-              <p>5 items left</p>
-              <button>Clear Completed</button>
+        <div className="min-h-screen grid grid-rows-[1fr_min-content]">
+          <main className="w-full h-full max-w-[33.75rem] mx-auto pt-10 px-6 md:px-0 md:pt-[4.875rem]">
+            <div className="flex justify-between items-center mb-7 md:mb-8">
+              <h1 className="text-[1.625rem] tracking-[10px] font-bold text-white md:text-[2.5rem] md:tracking-[15px]">
+                TODO
+              </h1>
+              <button
+                className="w-5 md:w-7"
+                aria-label="switch theme"
+                onClick={() => {
+                  localStorage.setItem("darkMode", `${!darkTheme}`);
+                  setDarkTheme((prev) => !prev);
+                }}
+              >
+                {!darkTheme && <img className="" src={iconMoon} alt="" />}
+                {darkTheme && <img className="" src={iconSun} alt="" />}
+              </button>
             </div>
-          </div>
 
-          <div className="rounded bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue flex items-center justify-center gap-4 -tracking-[0.2px] text-sm font-bold p-4">
-            <button className="text-brightBlue">All</button>
-            <button className="">Active</button>
-            <button className="">Completed</button>
-          </div>
+            <div className="rounded flex items-center gap-3 bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue py-4 px-5 mb-4 md:py-5 md:px-6 md:gap-5 md:mb-6">
+              <input type="checkbox" id="" />
+              <input
+                className="bg-inherit text-xs -tracking-[0.2px] w-full text-lt-veryDarkGrayishBlue dark:text-dt-lightGrayishBlue outline-none md:text-lg"
+                type="text"
+                placeholder="Create a new todo..."
+              />
+            </div>
 
-          <div className="text-sm -tracking-[0.2px] py-10 text-center text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue">
-            Drag and drop to reorder list
-          </div>
-        </main>
+            <div className="rounded bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue -tracking-[0.2px] text-xs mb-4 md:text-lg">
+              {todoData.map((todo) => (
+                <div className="border-b-[1px] border-lt-veryLightGrayishBlue dark:border-dt-veryDarkGrayishBlue2 p-5 flex items-center gap-3 md:px-6 md:gap-5">
+                  <input type="checkbox" id="" />
+                  <div
+                    className={
+                      todo.completed
+                        ? "w-full text-lt-lightGrayishBlue dark:text-dt-veryDarkGrayishBlue line-through"
+                        : "w-full text-lt-veryDarkGrayishBlue dark:text-dt-lightGrayishBlue"
+                    }
+                  >
+                    {todo.title}
+                  </div>
+                  <button className="" aria-label="delete">
+                    <img src={iconCross} alt="" />
+                  </button>
+                </div>
+              ))}
+              <div className="flex items-center justify-between p-5 text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue md:text-sm">
+                <p>5 items left</p>
+                <div className="hidden md:block">
+                  <div className="rounded bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue flex items-center justify-center gap-4 -tracking-[0.2px] text-sm font-bold p-4 md:p-0">
+                    <button className="text-brightBlue">All</button>
+                    <button className="">Active</button>
+                    <button className="">Completed</button>
+                  </div>
+                </div>
+                <button>Clear Completed</button>
+              </div>
+            </div>
 
-        <footer className="text-xs text-center py-1 text-lt-veryDarkGrayishBlue dark:text-dt-darkGrayishBlue">
-          Challenge by&nbsp;
-          <a
-            className="text-sm font-bold text-brightBlue"
-            href="https://www.frontendmentor.io?ref=challenge"
-            rel="noreferrer"
-            target="_blank"
-          >
-            Frontend Mentor
-          </a>
-          . Coded by&nbsp;
-          <a
-            className="text-sm font-bold text-brightBlue"
-            href="https://www.github.com/mgksp"
-            rel="noreferrer"
-            target="_blank"
-          >
-            Prabu
-          </a>
-          .
-        </footer>
+            <div className="rounded bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue flex items-center justify-center gap-4 -tracking-[0.2px] text-sm font-bold p-4 md:hidden">
+              <button className="text-brightBlue">All</button>
+              <button className="">Active</button>
+              <button className="">Completed</button>
+            </div>
+
+            <div className="text-sm -tracking-[0.2px] py-10 text-center text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue">
+              Drag and drop to reorder list
+            </div>
+          </main>
+
+          <footer className="text-xs text-center py-1 text-lt-veryDarkGrayishBlue dark:text-dt-darkGrayishBlue">
+            Challenge by&nbsp;
+            <a
+              className="text-sm font-bold text-brightBlue"
+              href="https://www.frontendmentor.io?ref=challenge"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Frontend Mentor
+            </a>
+            . Coded by&nbsp;
+            <a
+              className="text-sm font-bold text-brightBlue"
+              href="https://www.github.com/mgksp"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Prabu
+            </a>
+            .
+          </footer>
+        </div>
       </div>
     </Fragment>
   );
