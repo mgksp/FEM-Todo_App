@@ -9,7 +9,7 @@ export default function Header() {
   const theme = useSelector(
     (state: { theme: { value: boolean } }) => state.theme.value
   );
-  console.log(theme);
+
   return (
     <div className="flex justify-between items-center mb-7 md:mb-8">
       <h1 className="text-[1.625rem] tracking-[10px] font-bold text-white md:text-[2.5rem] md:tracking-[15px]">

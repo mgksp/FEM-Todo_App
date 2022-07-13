@@ -1,15 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { todoData } from "../data/todoData";
+import { iTodo, todoData } from "../data/todoData";
+
+const initialState: iTodo[] = todoData || [];
 
 export const todoSlice = createSlice({
   name: "todos",
-  initialState: { value: todoData },
+  initialState: { value: initialState },
   reducers: {
-    addTodo: (state, action) => {},
-    deleteTodo: (state, action) => {},
+    addTodo: (state, action) => {
+      state.value.push(action.payload);
+    },
+    deleteTodo: (state, action) => {
+      state.value = state.value.filter((todo) => todo.id !== action.payload);
+    },
   },
 });
 
-export const {} = todoSlice.actions;
+export const { addTodo, deleteTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;
