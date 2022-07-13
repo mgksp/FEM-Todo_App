@@ -3,7 +3,7 @@ import { iTodo } from "../data/todoData";
 import { FilterButtons } from ".";
 
 import iconCross from "../images/icon-cross.svg";
-import { deleteTodo } from "../redux/todos";
+import { deleteTodo, updateTodo } from "../redux/todos";
 
 export default function TodoList() {
   const todos = useSelector(
@@ -23,7 +23,11 @@ export default function TodoList() {
           key={todo.id}
           className="border-b-[1px] border-lt-veryLightGrayishBlue dark:border-dt-veryDarkGrayishBlue2 p-5 flex items-center gap-3 md:px-6 md:gap-5"
         >
-          <input type="checkbox" checked={todo.completed} id="" />
+          <input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => dispatch(updateTodo(todo.id))}
+          />
           <div
             className={
               todo.completed
