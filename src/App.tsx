@@ -11,6 +11,7 @@ import iconSun from "./images/icon-sun.svg";
 import iconCross from "./images/icon-cross.svg";
 
 import { todoData } from "./data/todoData";
+import { Footer, Header } from "./components";
 
 function App() {
   const [darkTheme, setDarkTheme] = useState<boolean>(false);
@@ -50,22 +51,7 @@ function App() {
 
         <div className="min-h-screen grid grid-rows-[1fr_min-content]">
           <main className="w-full h-full max-w-[33.75rem] mx-auto pt-10 px-6 md:px-0 md:pt-[4.875rem]">
-            <div className="flex justify-between items-center mb-7 md:mb-8">
-              <h1 className="text-[1.625rem] tracking-[10px] font-bold text-white md:text-[2.5rem] md:tracking-[15px]">
-                TODO
-              </h1>
-              <button
-                className="w-5 md:w-7"
-                aria-label="switch theme"
-                onClick={() => {
-                  localStorage.setItem("darkMode", `${!darkTheme}`);
-                  setDarkTheme((prev) => !prev);
-                }}
-              >
-                {!darkTheme && <img className="" src={iconMoon} alt="" />}
-                {darkTheme && <img className="" src={iconSun} alt="" />}
-              </button>
-            </div>
+            <Header darkTheme={darkTheme} setDarkTheme={setDarkTheme} />
 
             <div className="rounded flex items-center gap-3 bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue py-4 px-5 mb-4 md:py-5 md:px-6 md:gap-5 md:mb-6">
               <input type="checkbox" id="" />
@@ -118,27 +104,7 @@ function App() {
             </div>
           </main>
 
-          <footer className="text-xs text-center py-1 text-lt-veryDarkGrayishBlue dark:text-dt-darkGrayishBlue">
-            Challenge by&nbsp;
-            <a
-              className="text-sm font-bold text-brightBlue"
-              href="https://www.frontendmentor.io?ref=challenge"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Frontend Mentor
-            </a>
-            . Coded by&nbsp;
-            <a
-              className="text-sm font-bold text-brightBlue"
-              href="https://www.github.com/mgksp"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Prabu
-            </a>
-            .
-          </footer>
+          <Footer />
         </div>
       </div>
     </Fragment>
