@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { iTodo } from "../data/todoData";
 import { FilterButtons, Todo } from ".";
 
-import { deleteTodo, updateTodo } from "../redux/todos";
+import { clearCompletedTodos, deleteTodo, updateTodo } from "../redux/todos";
 
 export default function TodoList() {
   const todos = useSelector(
@@ -30,7 +30,9 @@ export default function TodoList() {
         <div className="hidden md:block">
           <FilterButtons />
         </div>
-        <button>Clear Completed</button>
+        <button onClick={() => dispatch(clearCompletedTodos())}>
+          Clear Completed
+        </button>
       </div>
     </div>
   );

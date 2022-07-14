@@ -22,9 +22,14 @@ export const todoSlice = createSlice({
       });
       localStorage.setItem("todos", JSON.stringify(state.value));
     },
+    clearCompletedTodos: (state) => {
+      state.value = state.value.filter((todo) => !todo.completed);
+      localStorage.setItem("todos", JSON.stringify(state.value));
+    },
   },
 });
 
-export const { addTodo, deleteTodo, updateTodo } = todoSlice.actions;
+export const { addTodo, deleteTodo, updateTodo, clearCompletedTodos } =
+  todoSlice.actions;
 
 export default todoSlice.reducer;
