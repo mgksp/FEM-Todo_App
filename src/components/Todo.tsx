@@ -1,3 +1,4 @@
+import { Checkbox } from ".";
 import { iTodo } from "../data/todoData";
 import iconCross from "../images/icon-cross.svg";
 
@@ -8,8 +9,12 @@ interface TodoProps {
 }
 export default function Todo({ todo, updateTodo, deleteTodo }: TodoProps) {
   return (
-    <div className="border-b-[1px] border-lt-veryLightGrayishBlue dark:border-dt-veryDarkGrayishBlue2 p-5 flex items-center gap-3 md:px-6 md:gap-5">
-      <input type="checkbox" checked={todo.completed} onChange={updateTodo} />
+    <div className="border-b-[1px] border-lt-veryLightGrayishBlue dark:border-dt-veryDarkGrayishBlue2 p-5 grid grid-cols-[min-content_1fr_min-content] place-items-center gap-3 md:px-6 md:gap-5">
+      <Checkbox
+        id={todo.id}
+        checked={todo.completed}
+        handleChange={updateTodo}
+      />
       <div
         className={
           todo.completed
@@ -19,7 +24,7 @@ export default function Todo({ todo, updateTodo, deleteTodo }: TodoProps) {
       >
         {todo.title}
       </div>
-      <button className="" aria-label="delete" onClick={deleteTodo}>
+      <button className="w-3 md:w-5" aria-label="delete" onClick={deleteTodo}>
         <img src={iconCross} alt="" />
       </button>
     </div>

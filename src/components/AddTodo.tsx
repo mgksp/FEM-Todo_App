@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Checkbox } from ".";
 import { addTodo } from "../redux/todos";
 import { v4 as uuidv4 } from "uuid";
 
@@ -10,12 +11,11 @@ export default function AddTodo() {
   const dispatch = useDispatch();
 
   return (
-    <div className="rounded flex items-center gap-3 bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue py-4 px-5 mb-4 md:py-5 md:px-6 md:gap-5 md:mb-6">
-      <input
-        type="checkbox"
+    <div className="rounded grid grid-cols-[min-content_1fr] place-items-center gap-3 bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue py-4 px-5 mb-4 md:py-5 md:px-6 md:gap-5 md:mb-6">
+      <Checkbox
+        id="newTodo"
         checked={completed}
-        id=""
-        onChange={() => setCompleted((prev) => !prev)}
+        handleChange={() => setCompleted((prev) => !prev)}
       />
       <input
         className="bg-inherit text-xs -tracking-[0.2px] w-full text-lt-veryDarkGrayishBlue dark:text-dt-lightGrayishBlue outline-none md:text-lg"
