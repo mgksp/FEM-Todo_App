@@ -3,6 +3,7 @@ import { iTodo } from "../data/todoData";
 import { FilterButtons, Todo } from ".";
 
 import { clearCompletedTodos, deleteTodo, updateTodo } from "../redux/todos";
+import { filter } from "../enums/filters";
 
 export default function TodoList() {
   const todos = useSelector(
@@ -13,11 +14,24 @@ export default function TodoList() {
     0
   );
 
+  const activeFilter = useSelector(
+    (state: { filters: { value: filter } }) => state.filters.value
+  );
+
+  const filteredList = () => {
+    if (activeFilter === filter.ALL) return todos;
+    else if (activeFilter === filter.ACTIVE) {
+      return todos.filter((todo) => !todo.completed);
+    } else if (activeFilter === filter.COMPLETED) {
+      return todos.filter((todo) => todo.completed);
+    }
+  };
+
   const dispatch = useDispatch();
 
   return (
     <div className="rounded bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue -tracking-[0.2px] text-xs mb-4 md:text-lg">
-      {todos.map((todo) => (
+      {filteredList()?.map((todo) => (
         <Todo
           key={todo.id}
           todo={todo}

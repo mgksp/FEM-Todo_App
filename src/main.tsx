@@ -5,12 +5,14 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import themeReducer from "./redux/theme";
 import todosReducer from "./redux/todos";
+import filtersReducer from "./redux/filters";
 import "./index.css";
 
 const store = configureStore({
   reducer: {
     theme: themeReducer,
     todos: todosReducer,
+    filters: filtersReducer,
   },
 });
 
