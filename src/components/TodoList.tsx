@@ -1,17 +1,15 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { iTodo } from "../data/todoData";
 import { FilterButtons, Todo } from ".";
 
-import {
-  clearCompletedTodos,
-  deleteTodo,
-  reorderTodos,
-  updateTodo,
-} from "../redux/todos";
+import { clearCompletedTodos, reorderTodos } from "../redux/todos";
 import { filter } from "../enums/filters";
 
 export default function TodoList() {
+  const [source, setSource] = useState<number | null>(null);
+  const [destination, setDestination] = useState<number | null>(null);
+
   const todos = useSelector(
     (state: { todos: { value: iTodo[] } }) => state.todos.value
   );
@@ -35,49 +33,45 @@ export default function TodoList() {
 
   const dispatch = useDispatch();
 
-  const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result;
+  const onDragStart = (idx: number) => {
+    console.log("source", idx);
+    setSource(idx);
+  };
 
-    if (!destination) return;
+  const onDragEnter = (idx: number) => {
+    console.log("hovering over", idx);
+    setDestination(idx);
+    console.log({ source, destination });
+  };
 
-    if (source.index === destination.index) return;
-
-    dispatch(reorderTodos({ from: source.index, to: destination.index }));
+  const onDragEnd = () => {
+    if (activeFilter !== (filter.ACTIVE || filter.COMPLETED)) {
+      if (source !== destination) {
+        dispatch(reorderTodos({ from: source, to: destination }));
+      }
+    }
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="todoList">
-        {(provided) => {
-          return (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className="rounded bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue -tracking-[0.2px] text-xs mb-4 md:text-lg"
-            >
-              {filteredList()?.map((todo, idx) => (
-                <Todo
-                  key={todo.id}
-                  idx={idx}
-                  todo={todo}
-                  updateTodo={() => dispatch(updateTodo(todo.id))}
-                  deleteTodo={() => dispatch(deleteTodo(todo.id))}
-                />
-              ))}
-              {provided.placeholder}
-              <div className="flex items-center justify-between p-5 text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue md:text-sm">
-                <p>{todosLeft} items left</p>
-                <div className="hidden md:block">
-                  <FilterButtons />
-                </div>
-                <button onClick={() => dispatch(clearCompletedTodos())}>
-                  Clear Completed
-                </button>
-              </div>
-            </div>
-          );
-        }}
-      </Droppable>
-    </DragDropContext>
+    <div className="rounded bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue -tracking-[0.2px] text-xs mb-4 md:text-lg">
+      {filteredList()?.map((todo, idx) => (
+        <Todo
+          key={todo.id}
+          todo={todo}
+          dragStart={() => onDragStart(idx)}
+          dragEnter={() => onDragEnter(idx)}
+          dragEnd={onDragEnd}
+        />
+      ))}
+      <div className="flex items-center justify-between p-5 text-lt-darkGrayishBlue dark:text-dt-darkGrayishBlue md:text-sm">
+        <p>{todosLeft} items left</p>
+        <div className="hidden md:block">
+          <FilterButtons />
+        </div>
+        <button onClick={() => dispatch(clearCompletedTodos())}>
+          Clear Completed
+        </button>
+      </div>
+    </div>
   );
 }
