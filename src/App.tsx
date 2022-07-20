@@ -19,7 +19,10 @@ function App() {
           : "relative z-0 bg-lt-veryLightGrayishBlue"
       }
     >
-      <div className="absolute -z-50 top-0 left-0 right-0 h-[12.5rem] md:h-[18.75rem]">
+      <section
+        aria-label="bg images"
+        className="absolute -z-50 top-0 left-0 right-0 h-[12.5rem] md:h-[18.75rem]"
+      >
         <img
           className="md:hidden object-cover h-full w-full"
           src={darkTheme ? bgMobDark : bgMobLight}
@@ -30,7 +33,7 @@ function App() {
           src={darkTheme ? bgDesktopDark : bgDesktopLight}
           alt=""
         />
-      </div>
+      </section>
 
       <div className="min-h-screen grid grid-rows-[1fr_min-content]">
         <main className="w-full h-full max-w-[33.75rem] mx-auto pt-10 px-6 md:px-0 md:pt-[4.875rem]">

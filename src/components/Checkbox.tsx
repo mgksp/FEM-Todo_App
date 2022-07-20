@@ -14,13 +14,13 @@ export default function Checkbox({ id, checked, handleChange }: CheckboxProps) {
         checked ? "" : "border-2"
       } border-gray-400 hover:border-0 grid place-items-center cursor-pointer md:w-6 md:h-6`}
     >
-      <motion.div
+      <motion.span
         initial={{ scale: checked ? 0 : 1 }}
         animate={{ scale: checked ? 0 : 1 }}
         className="absolute top-0 left-0 w-full h-full hover:p-[2px]"
       >
-        <div className="w-full h-full bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue rounded-full"></div>
-      </motion.div>
+        <span className="w-full h-full bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue rounded-full"></span>
+      </motion.span>
 
       <img src={iconCheck} alt="" />
       <input
