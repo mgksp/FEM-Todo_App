@@ -19,7 +19,7 @@ export default function Checkbox({ id, checked, handleChange }: CheckboxProps) {
         animate={{ scale: checked ? 0 : 1 }}
         className="absolute top-0 left-0 w-full h-full hover:p-[2px]"
       >
-        <span className="w-full h-full bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue rounded-full"></span>
+        <span className="w-full h-full block bg-lt-veryLightGray dark:bg-dt-veryDarkDesaturatedBlue rounded-full"></span>
       </motion.span>
 
       <img src={iconCheck} alt="" />
